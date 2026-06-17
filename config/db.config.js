@@ -1,22 +1,25 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const db = new Sequelize(
-  'defaultdb',
-  'avnadmin',
-  'AVNS_ktuZR6H-KlqKKu7VSR-',
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: "mysql-1b97a8e2-akb-f455.h.aivencloud.com",
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: "mysql",
-    port: 28223,
     define: {
-      timestamps: false
+      timestamps: false,
     },
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
+        rejectUnauthorized: false,
+      },
+    },
   }
 );
 

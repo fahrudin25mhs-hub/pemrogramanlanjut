@@ -35,12 +35,14 @@ try {
   await db.authenticate();
   console.log("Database OK");
 
-  await db.sync({ alter: true });
+  await db.sync();
   console.log("Semua tabel berhasil dibuat otomatis");
 } catch (error) {
   console.log("Database gagal:", error);
 }
 
-app.listen(5100, () => {
-  console.log("Server running on port 5100");
+const PORT = process.env.PORT || 5100;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
