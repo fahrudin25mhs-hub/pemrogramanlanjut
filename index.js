@@ -1,25 +1,22 @@
 import express from "express";
-import cors from "cors";
-
-import db from "./config/db.config.js";
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+app.get("/", async (req, res) => {
+  try {
+    const mysql2 = await import("mysql2");
 
-app.get("/", (req, res) => {
-  res.json({
-    status: "success",
-    message: "Backend berhasil deploy"
-  });
+    res.json({
+      status: "success",
+      mysql2_loaded: true,
+      message: "mysql2 berhasil dimuat"
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: error.message
+    });
+  }
 });
-
-try {
-  await db.authenticate();
-  console.log("Database connected successfully");
-} catch (error) {
-  console.log("Database connection failed:", error);
-}
 
 export default app;
