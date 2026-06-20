@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import db from "config/db.config.js";
+import db from "./config/db.config.js";
 
 const app = express();
 
