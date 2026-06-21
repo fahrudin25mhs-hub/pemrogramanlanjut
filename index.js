@@ -1,22 +1,13 @@
 import express from "express";
+import db from "./config/db.config.js";
 
 const app = express();
 
-app.get("/", async (req, res) => {
-  try {
-    const mysql2 = await import("mysql2");
-
-    res.json({
-      status: "success",
-      mysql2_loaded: true,
-      message: "mysql2 berhasil dimuat"
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message
-    });
-  }
+app.get("/", (req, res) => {
+  res.json({
+    status: "success",
+    message: "db.config.js berhasil di-load"
+  });
 });
 
 export default app;
