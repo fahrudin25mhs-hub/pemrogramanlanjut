@@ -45,10 +45,5 @@ try {
   console.log("Database gagal:", error);
 }
 
-app.get("/api/test", (req, res) => {
-  res.json({
-    message: "API TEST BERHASIL"
-  });
-});
 
 export default app;
