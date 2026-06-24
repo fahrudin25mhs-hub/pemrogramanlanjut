@@ -1,14 +1,6 @@
 import mysql from "mysql2";
 import { Sequelize } from "sequelize";
 
-console.log("MYSQL2 =", typeof mysql);
-
-console.log("DB_NAME =", process.env.DB_NAME);
-console.log("DB_USER =", process.env.DB_USER);
-console.log("DB_HOST =", process.env.DB_HOST);
-console.log("DB_PORT =", process.env.DB_PORT);
-console.log("DB_PASSWORD =", process.env.DB_PASSWORD ? "ADA" : "KOSONG");
-
 const db = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -18,12 +10,15 @@ const db = new Sequelize(
     port: process.env.DB_PORT,
     dialect: "mysql",
     dialectModule: mysql,
+    define: {
+      timestamps: false
+    },
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false,
-      },
-    },
+        rejectUnauthorized: false
+      }
+    }
   }
 );
 
