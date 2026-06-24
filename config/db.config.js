@@ -1,5 +1,8 @@
 import mysql from "mysql2";
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const db = new Sequelize(
   process.env.DB_NAME,
@@ -11,14 +14,14 @@ const db = new Sequelize(
     dialect: "mysql",
     dialectModule: mysql,
     define: {
-      timestamps: false
+      timestamps: false,
     },
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
+        rejectUnauthorized: false,
+      },
+    },
   }
 );
 
