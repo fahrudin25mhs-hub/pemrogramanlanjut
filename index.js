@@ -1,22 +1,48 @@
 import express from "express";
+import cors from "cors";
 import db from "./config/db.config.js";
+
+// import model
+import "./models/buku.models.js";
+import "./models/mahasiswa.models.js";
+import "./models/prodi.models.js";
+import "./models/pinjam.models.js";
+
+// import routes
+import Bukuroutes from "./route/buku.routes.js";
+import mahasiswaroutes from "./route/mahasiswa.routes.js";
+import prodiroutes from "./route/prodi.routes.js";
+import pinjamroutes from "./route/pinjam.routes.js";
+import userroutes from "./route/user.routes.js";
 
 const app = express();
 
-app.get("/", async (req, res) => {
-  try {
-    await db.authenticate();
+// middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-    res.json({
-      status: "success",
-      message: "Database connected"
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: error.message
-    });
-  }
+// routes
+app.use("/api/buku", Bukuroutes);
+app.use("/api/mahasiswa", mahasiswaroutes);
+app.use("/api/prodi", prodiroutes);
+app.use("/api/pinjam", pinjamroutes);
+app.use("/api/user", userroutes);
+
+// test root
+app.get("/", (req, res) => {
+  res.json({
+    status: "success",
+    message: "API berjalan"
+  });
 });
+
+// database
+try {
+  await db.authenticate();
+  console.log("Database OK");
+} catch (error) {
+  console.log("Database gagal:", error);
+}
 
 export default app;
