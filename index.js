@@ -7,6 +7,8 @@ import "./models/buku.models.js";
 import "./models/mahasiswa.models.js";
 import "./models/prodi.models.js";
 import "./models/pinjam.models.js";
+import "./models/user.models.js";
+import "./models/detailpinjam.models.js";
 
 // import routes
 import Bukuroutes from "./route/buku.routes.js";
@@ -41,6 +43,8 @@ app.get("/", (req, res) => {
 try {
   await db.authenticate();
   console.log("Database OK");
+  await db.sync();
+  console.log("Database synced successfully");
 } catch (error) {
   console.log("Database gagal:", error);
 }
